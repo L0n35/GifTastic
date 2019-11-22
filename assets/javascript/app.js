@@ -8,6 +8,7 @@ animals = [
   "Falcon",
   "Kangaroo"
 ];
+
 celebrities = [
   "Dwayne Johnson",
   "Kevin Hart",
@@ -17,12 +18,17 @@ celebrities = [
   "Beyonce"
 ];
 
+function randomIntFromInterval(min, max) {
+  result = Math.floor(Math.random() * (max - min + 1) + min);
+  console.log(result);
+  return result;
+}
+
 for (var i = 0; i < animals.length; i++) {
   btn = $("<button>");
   btn.attr("class", "btn");
   btn.text(animals[i]);
   btn.val(animals[i]);
-  console.log(btn);
   $("#animals").append(btn);
 }
 
@@ -31,7 +37,6 @@ for (var i = 0; i < celebrities.length; i++) {
   btn.attr("class", "btn");
   btn.val(celebrities[i]);
   btn.text(celebrities[i]);
-  console.log(btn.val());
   $("#celebrities").append(btn);
 }
 
@@ -50,11 +55,35 @@ $(".btn").on("click", function() {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    original = response.data[0].images.original.url;
+    int = randomIntFromInterval(0, 9);
 
-    let g = $("<img>");
-    g.attr("src", original);
+    animated = response.data[int].images.fixed_height.url;
+    still = response.data[int].images.fixed_height_still.url;
+    rating = response.data[int].rating;
 
-    $("#gifs").append(g);
+    console.log(response);
+
+    let gifDiv = $("<div>");
+    gifDiv.attr("class", "i");
+
+    let gif = $("<img>");
+    gif.attr("src", still);
+    gif.attr("class", "gif");
+    gifDiv.append(gif);
+
+    let r = $("<p>");
+    r.html("Rating: " + rating.toUpperCase());
+    gifDiv.append(r);
+
+    $("#gifs").append(gifDiv);
+
+    $(".gif").on("click", function() {
+      if (gif.attr("src") === still) {
+        console.log("hi");
+        gif.attr("src", animated);
+      } else {
+        gif.attr("src", still);
+      }
+    });
   });
 });
