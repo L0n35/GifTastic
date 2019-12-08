@@ -1,21 +1,14 @@
-animals = [
-  "Dog",
-  "Cat",
-  "Elephant",
-  "Tiger",
-  "Horse",
-  "Eagle",
-  "Falcon",
-  "Kangaroo"
-];
-
-celebrities = [
-  "Dwayne Johnson",
-  "Kevin Hart",
+trending = [
   "Chris Hemsworth",
+  "Dogs",
+  "Dwayne Johnson",
   "Ariana Grande",
-  "Jennifer Anniston",
-  "Beyonce"
+  "NFL",
+  "Cats",
+  "Formula 1",
+  "Kangaroos",
+  "Filthy Frank",
+  "Pokemon"
 ];
 
 function randomIntFromInterval(min, max) {
@@ -24,33 +17,48 @@ function randomIntFromInterval(min, max) {
   return result;
 }
 
-for (var i = 0; i < animals.length; i++) {
+for (var i = 0; i < trending.length; i++) {
   btn = $("<button>");
   btn.attr("class", "btn");
-  btn.text(animals[i]);
-  btn.val(animals[i]);
-  $("#animals").append(btn);
+  btn.text(trending[i]);
+  btn.val(trending[i]);
+  $("#trending-sub").append(btn);
 }
 
-for (var i = 0; i < celebrities.length; i++) {
-  btn = $("<button>");
-  btn.attr("class", "btn");
-  btn.val(celebrities[i]);
-  btn.text(celebrities[i]);
-  $("#celebrities").append(btn);
-}
+// $("#searchBtn").on("click", function() {
+//   btn = $("<button>");
+//   btn.attr("class", "btn");
+//   btn.text($("#gifSearch").val());
+//   btn.val($("#gifSearch").val());
+//   $(".searched").append(btn);
+// });
 
 $(".btn").on("click", function() {
   topic = $(this).val();
+  console.log("hi");
+
+  search = $("#gifSearch").val();
+
+  console.log(topic);
 
   apikey = "hsAf7qo79nuISthhd3XCPdqLoPdl5dfb";
-  queryURL =
-    "http://api.giphy.com/v1/gifs/search?q=" +
-    topic +
-    "&api_key=" +
-    apikey +
-    "&limit=10";
-
+  if ($(".b").on("click") === true) {
+    queryURL =
+      "http://api.giphy.com/v1/gifs/search?q=" +
+      topic +
+      "&api_key=" +
+      apikey +
+      "&limit=10";
+    console.log("a");
+  } else {
+    queryURL =
+      "http://api.giphy.com/v1/gifs/search?q=" +
+      search +
+      "&api_key=" +
+      apikey +
+      "&limit=10";
+    console.log("b");
+  }
   $.ajax({
     url: queryURL,
     method: "GET"

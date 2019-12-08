@@ -11,12 +11,25 @@
 ></script>
 
 <body>
-  <div id="animals">
-    <p>Animals</p>
-  </div>
+  <div id="trending">
+    <p class="t">Trending GIFs</p>
 
-  <div id="celebrities">
-    <p>Celebrities</p>
+    <!-- Search for GIFs -->
+    <div id="trending-sub"></div>
+
+    <p class="t">Search for GIFs</p>
+
+    <input
+      type="text"
+      name="gif"
+      placeholder="Enter a topic"
+      class="w"
+      id="gifSearch"
+    />
+
+    <input type="submit" value="Submit" id="searchBtn" class="btn b" />
+
+    <div class="searched"></div>
   </div>
 
   <div class="divider"></div>
